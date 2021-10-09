@@ -43,7 +43,7 @@ async function handler(req, res) {
         }
 
         // fetch the projects
-        let projects = await client.db()
+        let projects = await client.db('plotnetwork')
             .collection('project')
             .find(findProjectQuery).toArray();
 
