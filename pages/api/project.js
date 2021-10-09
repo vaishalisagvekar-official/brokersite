@@ -6,7 +6,7 @@ import initMiddleware from '../../common-methods/middleware';
 
 import { getStaticKeys } from '../../common-methods/constants';
 import { updateFileData, readFileData} from '../../common-methods/file-operations';
-import { client } from '../../lib/mongodb';
+import { connectToDatabase } from '../../lib/mongodb';
 
 const filePath = 'D:/plotnetwork/microsite-nextjs/partner-pages/partner-pages-main/config/project.json';
 const relativeFilePath = 'config/project.json';
@@ -42,8 +42,10 @@ async function handler(req, res) {
             });
         }
 
+        let { db } = await connectToDatabase();
+
         // fetch the projects
-        let projects = await client.db('plotnetwork')
+        let projects = await db
             .collection('project')
             .find(findProjectQuery).toArray();
 
