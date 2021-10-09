@@ -13,7 +13,11 @@ export async function getStaticPaths() {
 
 		project.brokers = brokers.filter((broker) => project._id == broker.projectId);
 		project.brokers.forEach((broker) => {
-			if(broker.isDeleted) return false;
+			console.log(" came to create path ")
+			if(broker.isDeleted) {
+				console.log("broker deleted")
+				return false;
+			}
 			
 			let brokerName = broker.fullName.replace(' ','-');
 			brokerName = brokerName.toLowerCase();
@@ -22,6 +26,7 @@ export async function getStaticPaths() {
 					partner: [`${index}`, `${brokerName}`]
 				}
 			}
+			console.log("path created")
 			pathArray.push(paramObj);
 		});
 	})
@@ -37,14 +42,20 @@ export async function getStaticProps({ params }) {
 	console.log(params)
 	let foundPartner;
 	let foundBroker;
-	brokers.forEach((brokeObj) => {
+	
+	foundPartner = projects[params.partner[0]];
+	const projectsBrokers = brokers.filter((broker) => foundPartner.projectId !== broker.projectId);
+
+	projectsBrokers.forEach((brokeObj) => {
+		if(brokeObj.isDeleted) return false;
+
 		let brokerName = brokeObj.fullName.replace(' ','-');
 			brokerName = brokerName.toLowerCase();
-		if (!foundBroker && brokerName == params.partner[1]) {
+		if (!foundBroker &&  brokerName == params.partner[1]) {
 			foundBroker = brokeObj;
 		}
 	});
-	foundPartner = projects[params.partner[0]];
+
 	// projects.forEach((partner) => {
 	// 	console.log(params)
 	// 	if (!foundPartner && partner.projectName == params.partner[0]) {
