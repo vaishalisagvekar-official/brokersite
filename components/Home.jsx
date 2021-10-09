@@ -38,7 +38,7 @@ class Home extends Component {
 	}
 
 	render() {
-		
+		console.log(this.props)
 		const { logoLong } = this.props.projectData;
 		let sections = [];
 		if(this.props.projectData.websiteMenus !== undefined){

@@ -4,7 +4,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 import { getStaticKeys } from '../../common-methods/constants';
 import { updateFileData, readFileData } from '../../common-methods/file-operations';
-import { connectToDatabase } from '../../common-methods/database';
+import { connectToDatabase } from '../../lib/mongodb';
 const filePath = 'D:/plotnetwork/microsite-nextjs/partner-pages/partner-pages-main/config/broker.json';
 const relativeFilePath = 'config/broker.json';
 
