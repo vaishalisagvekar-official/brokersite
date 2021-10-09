@@ -36,11 +36,12 @@ async function handler(req, res) {
         
         const requestObj = JSON.parse(JSON.stringify(req.body))
         if(requestObj.projectId !== undefined) findProjectQuery._id = new ObjectId(requestObj.projectId);
-        else {
-            res.status(401).json({
-                message: "Missing project id field in reuest object"
-            });
-        }
+        
+        // else {
+        //     res.status(401).json({
+        //         message: "Missing project id field in reuest object"
+        //     });
+        // }
 
         let { db } = await connectToDatabase();
 
