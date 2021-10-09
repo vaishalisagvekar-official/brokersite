@@ -3,9 +3,10 @@ import { withRouter } from 'next/router';
 
 import globalStyles from '../styles/styles.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Modal from 'react-bootstrap/Modal';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav';
+import Modal from 'react-bootstrap/Modal';
+
 
 import SlideShow from './SlideShow';
 import AboutUs from './AboutUs';
