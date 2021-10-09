@@ -1,8 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # JSON files
-/config
-
+/config/broker.json
+/config/project.json
 
 # dependencies
 /node_modules
