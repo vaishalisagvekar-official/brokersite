@@ -150,7 +150,7 @@
     },
     {
         "_id": "615864dc4473255a14deaf9b",
-        "updatedAt": 1630065398770,
+        "updatedAt": 1633801836074,
         "isDeleted": false,
         "projectName": "Test",
         "partnerName": "kohinoor",
@@ -160,6 +160,36 @@
         "reportMobile": "https://datastudio.google.com/embed/reporting/f16fd757-bd4e-4ddf-81eb-97b29e568d90/page/a2BAC_1",
         "leadClosingTime": 1,
         "settings": {},
-        "createdAt": 1632999444052
+        "createdAt": 1632999444052,
+        "websiteMenus": {
+            "sections": [
+                {
+                    "id": "banner",
+                    "title": "Home",
+                    "images": [
+                        "https://project-microsite-data.s3.amazonaws.com/kohinoor_Test/banner/1.jpg"
+                    ]
+                },
+                {
+                    "id": "about",
+                    "title": "About Us",
+                    "displayTitle": "about title",
+                    "description": "about description",
+                    "image": "",
+                    "brochureLink": ""
+                },
+                {
+                    "id": "contactUs",
+                    "title": "Contact Us",
+                    "mapLink": "map location should be here"
+                },
+                {
+                    "id": "footer",
+                    "title": "Footer",
+                    "description": "tst footer update",
+                    "disclaimer": "test disclaimer"
+                }
+            ]
+        }
     }
 ]

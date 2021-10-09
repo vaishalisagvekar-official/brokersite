@@ -26,7 +26,7 @@ export default function CarouselContainer(props) {
 							);
 						}
 						return <Carousel.Item>
-									<img className={`d-block w-100 ${containerHeight}`} src={source} alt="First slide"/>
+									<img className={`d-block w-100 ${containerHeight}`} src={source} alt={`${sectionId} Slide ${index}`}/>
 									<Carousel.Caption className="centered">
 										{snippet}
 									</Carousel.Caption>

@@ -22,16 +22,16 @@ export default function ContactUs(props) {
                     <p>{`An authorized channel partner of `}</p>
                     <div className="row">
                         <div className="col-2">
-                            <img  src="/assets/images/place.png"/>
+                            <img  src="/assets/images/place.png" alt="Place Icon"/>
                         </div>
                         <div className="col-10">
-                            <div className="brokerDetailsTitle">OUR ADDRESS</div>
+                            <div className="brokerDetailsTitle" alt="Address Icon">OUR ADDRESS</div>
                             <p>{brokerData.address}</p>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-2">
-                            <img  src="/assets/images/mail.png"/>
+                            <img  src="/assets/images/mail.png" alt="Email Icon"/>
                         </div>
                         <div className="col-10">
                             <div className="brokerDetailsTitle">EMAIL ADDRESS</div>
@@ -42,7 +42,7 @@ export default function ContactUs(props) {
                     </div>
                     <div className="row">
                         <div className="col-2">
-                            <img  src="/assets/images/phone.png"/>
+                            <img  src="/assets/images/phone.png" alt="Phone Icon"/>
                         </div>
                         <div className="col-10">
                             <div className="brokerDetailsTitle">OUR PHONE</div>
@@ -53,7 +53,7 @@ export default function ContactUs(props) {
                     </div>
                     <div className="row">
                     <div className="col-2">
-                        <img  src="/assets/images/document.png"/>
+                        <img  src="/assets/images/document.png" alt="Rera No Icon"/>
                     </div>
                     <div className="col-10">
                         <div className="brokerDetailsTitle">RERA NUMBER</div>

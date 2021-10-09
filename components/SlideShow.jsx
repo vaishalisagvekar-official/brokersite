@@ -37,6 +37,7 @@ class SlideShow extends React.Component {
 				<img 
 				  src={image}
 				  style={{ width: "inherit", height: "inherit" }}
+				  alt={`${section} Slide ${index}`}
 				/>
 			  </div>
 			);

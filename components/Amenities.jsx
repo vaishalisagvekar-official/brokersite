@@ -27,7 +27,7 @@ export default function Amenities(props) {
                                     onMouseOver={changeBackground}
                                     onMouseOut={revertBackground}>
                                         <div style={{height:'fit-content', verticalAlign: 'middle', margin: 'auto' }}>
-                                            <img className={`${props.imageCss}`} src={amenityObj.icon} />
+                                            <img className={`${props.imageCss}`} src={amenityObj.icon} alt={`Amenity Icon ${index}`} />
                                             <div className="amenityTitle">{amenityObj.title}</div>
                                         </div>
                                 </div>

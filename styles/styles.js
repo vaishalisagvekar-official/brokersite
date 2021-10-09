@@ -256,6 +256,9 @@ export default css.global`
   color: white;
   background-color: var(--themeColor, black);
   white-space:pre-wrap;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .form-control {

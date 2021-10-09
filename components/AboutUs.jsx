@@ -5,12 +5,12 @@ export default function AboutUs(props) {
         <div id={props.section}>
             <div className="row aboutUs">
                 <div className="col-12 col-md-6 aboutSections">
-                    <img  src={image} style={{ width: "100%", height: "100%" }} />
+                    <img  src={image} style={{ width: "100%", height: "100%" }} alt="About Us Image"/>
                 </div>
                 <div className={`col-12 col-md-6 aboutSections ${props.cssClass}`}>
                     <h2 className="aboutTitle">{displayTitle.toLocaleUpperCase()}</h2>
                     <div className="titleBorder" style={{ margin: '0', color: 'inherit'}}></div>
-                    <div className="description">{description}\n vaishali</div>
+                    <div className="description">{description}</div>
                     <button className="btn themeColor brochure description" onClick={(e) => window.open(brochureLink)}>
                         DOWNLOAD BROCHURE
                     </button>

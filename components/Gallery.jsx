@@ -27,7 +27,7 @@ class Gallery extends React.Component {
 						return (
 							<React.Fragment>
 								<div className="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 galleryImgDiv" key={`gallery${index}`} onClick={() => this.openGallery(index)}>
-									<img  src={image} />
+									<img  src={image} alt={`Gallery Image ${index}`} />
 									{/* <div className="overlay">
 										<a href="#" className="icon" title="User Profile">
 											+

@@ -68,83 +68,85 @@ class Home extends Component {
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>
-			
 			{
-				sections.map((section) => {
-						switch (section.id) {
-							case 'banner':
-								return <SlideShow 
-											key={section.id} 
-											section={section.id}
-											imgArray={section.images} 
-											cssClass={"bannerContainer"}>
-										</SlideShow>
-								break;
-
-							case 'about':
-								return <AboutUs 
-											key={section.id}
-											section={section.id} 
-											aboutUsData={section} 
-											cssClass={"verticallyMiddle"}>
-										</AboutUs>
-								break;
-
-							case 'amenities':
-								return <Amenities 
-											key={section.id}
-											section={section.id} 
-											amenitiesData={section} 
-											imageCss="amenityIcon" 
-											containerCss="verticallyMiddle">
-										</Amenities>
-								break;
-
-							case 'virtualTour':
-								return <VirtualTour
-											key={section.id}
-											section={section.id}
-											virtualTourData={section}>
-										</VirtualTour>
-								break;
-
-							case 'gallery':
-								return <Gallery 
-											key={section.id}
-											section={section.id} 
-											galleryData={section}>
-										</Gallery>
-								break;
-						
-							case 'floorPlans':
-								return <FloorPlan
-											key={section.id}
-											section={section.id}
-											floorPlanData={section}
-										></FloorPlan>
-								break;
-					
-							case 'contactUs':
-								return <ContactUs
+				sections.map((section, index) => {
+					if(section.id == 'banner'){
+						return <SlideShow 
+									key={section.id} 
+									section={section.id}
+									imgArray={section.images} 
+									cssClass={"bannerContainer"}>
+								</SlideShow>
+					}
+			
+					if(section.id == 'about') {
+						return <AboutUs 
+									key={section.id}
+									section={section.id} 
+									aboutUsData={section} 
+									cssClass={"verticallyMiddle"}>
+								</AboutUs>
+					}
+		
+					if(section.id == 'amenities') {
+						return <Amenities 
+									key={section.id}
+									section={section.id} 
+									amenitiesData={section} 
+									imageCss="amenityIcon" 
+									containerCss="verticallyMiddle">
+								</Amenities>
+					}
+		
+					if(section.id == 'virtualTour') {
+						return <VirtualTour
+									key={section.id}
+									section={section.id}
+									virtualTourData={section}>
+								</VirtualTour>
+					}
+		
+					if(section.id == 'gallery') {
+						return <Gallery 
+									key={section.id}
+									section={section.id} 
+									galleryData={section}>
+								</Gallery>
+					}
+		
+					if(section.id == 'floorPlans') {
+						return <FloorPlan
+									key={section.id}
+									section={section.id}
+									floorPlanData={section}
+								></FloorPlan>
+					}
+		
+					if(index == sections.length - 1){
+						if(section.id == 'footer') {
+							return <>
+										<ContactUs
 											key={section.id}
 											section={section.id}
 											contactUsData={section}
 											brokerData={this.props.brokerData}
 										></ContactUs>
-								break;
-					
-							case 'footer':
-								return <Footer
+										<Footer
 											key={section.id}
 											section={section.id}
 											footerData={section}
 											cssClass={"verticallyMiddle"}
 										></Footer>
-								break;
-						
-							default:
-								break;
+									</>
+						} else {
+							return <ContactUs
+										key={section.id}
+										section={section.id}
+										contactUsData={section}
+										brokerData={this.props.brokerData}
+									></ContactUs>
 						}
+					}
 				})
 			}
 			<ModalContainer id="enquiryFormId" title="Get In Touch">
@@ -156,7 +158,6 @@ class Home extends Component {
 }
 
 export default withRouter(Home);
-
 
 function Footer(props){
 	const [show, setShow] = useState(false);
@@ -196,25 +197,24 @@ function ModalContainer(props) {
 
 	const [show, setShow] = useState(false);
 	
-	console.log("came in modal container")
-		return (
-			<>
-				<div id="enquire-now" className="enquire-now" onClick={() => setShow(true)}>
-					<a href="#" className="enquire-now-btn btn  btn-lg" >ENQUIRE NOW</a>
-				</div>
-				<Modal
-					show={show}
-					onHide={() => setShow(false)}
-					backdrop="static"
-					keyboard={false}
-				>
-					<Modal.Header closeButton>
-						<Modal.Title>{props.title}</Modal.Title>
-					</Modal.Header>
-					<Modal.Body>
-						{props.children}
-					</Modal.Body>
-				</Modal>
-			</>
-		)
+	return (
+		<>
+			<div id="enquire-now" className="enquire-now" onClick={() => setShow(true)}>
+				<a href="#" className="enquire-now-btn btn  btn-lg" >ENQUIRE NOW</a>
+			</div>
+			<Modal
+				show={show}
+				onHide={() => setShow(false)}
+				backdrop="static"
+				keyboard={false}
+			>
+				<Modal.Header closeButton>
+					<Modal.Title>{props.title}</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					{props.children}
+				</Modal.Body>
+			</Modal>
+		</>
+	)
 }
