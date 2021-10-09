@@ -2,7 +2,6 @@ import EnquiryForm from "./EnquiryForm";
 
 export default function ContactUs(props) {
 
-    const { id, title, mapLink } = props.contactUsData;
     const brokerData = props.brokerData;
     const onSubmitEquiryForm = (e) =>{
 		e.preventDefault();
@@ -62,13 +61,19 @@ export default function ContactUs(props) {
                 </div>
                 </div>
             </div>
-            <div className="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 contactUs contactUsMap">
-                <iframe 
-                    src={mapLink} 
-                    className="fullSize"
-                    title="Our location on google map">
-                </iframe>
-            </div>
+
+            {
+                props.contactUsData ? (
+                    <div className="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 contactUs contactUsMap">
+                        <iframe 
+                            src={props.contactUsData.mapLink} 
+                            className="fullSize"
+                            title="Our location on google map">
+                        </iframe>
+                    </div>
+                ) : ''
+            }
+            
         </div>
     );	
 }

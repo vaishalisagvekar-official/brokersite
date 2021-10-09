@@ -46,6 +46,9 @@ class Home extends Component {
 			sections = this.props.projectData.websiteMenus.sections ? this.props.projectData.websiteMenus.sections : [];
 		}
 
+		const contactUsSection = sections.filter((section) => section.id == "contactUs")
+
+
 	return (
 		<div className="microsite-content">
 			<style jsx global>
@@ -71,6 +74,8 @@ class Home extends Component {
 			</Navbar>
 			{
 				sections.map((section, index) => {
+					console.log(section.id)
+					console.log(index)
 					if(section.id == 'banner'){
 						return <SlideShow 
 									key={section.id} 
@@ -122,34 +127,37 @@ class Home extends Component {
 									floorPlanData={section}
 								></FloorPlan>
 					}
-		
-					if(index == sections.length - 1){
-						if(section.id == 'footer') {
-							return <>
-										<ContactUs
-											key={section.id}
-											section={section.id}
-											contactUsData={section}
-											brokerData={this.props.brokerData}
-										></ContactUs>
-										<Footer
-											key={section.id}
-											section={section.id}
-											footerData={section}
-											cssClass={"verticallyMiddle"}
-										></Footer>
-									</>
-						} else {
-							return <ContactUs
-										key={section.id}
-										section={section.id}
-										contactUsData={section}
-										brokerData={this.props.brokerData}
-									></ContactUs>
-						}
-					}
+
+					
 				})
 			}
+			{
+				contactUsSection.length > 0 ? (
+					<ContactUs
+						key={section.id}
+						section={section.id}
+						contactUsData={section}
+						brokerData={this.props.brokerData}
+					></ContactUs>
+				) : (
+					<ContactUs
+						key="contactUs"
+						section="contactUs"
+						brokerData={this.props.brokerData}
+					></ContactUs>
+				)
+			}
+			{ 
+				sections[sections.length - 1].id == 'footer' ? (
+					<Footer
+						key={sections[sections.length - 1].id}
+						section={sections[sections.length - 1].id}
+						footerData={sections[sections.length - 1]}
+						cssClass={"verticallyMiddle"}
+					></Footer>
+				) : ''
+			}
+
 			<ModalContainer id="enquiryFormId" title="Get In Touch">
 				<EnquiryForm isFromModal={true}></EnquiryForm>
 			</ModalContainer>
@@ -172,22 +180,29 @@ function Footer(props){
 					{description}
 					<br />
 					<br />
-					<div onClick={() => setShow(true)} style={{cursor : 'pointer'}}>Disclaimer</div>
-					<Modal
-						show={show}
-						onHide={() => setShow(false)}
-						backdrop="static"
-						keyboard={false}
-					>
-						<Modal.Header closeButton>
-							<Modal.Title>Disclaimer</Modal.Title>
-						</Modal.Header>
-						<Modal.Body>
-							<div className="disclaimer">
-								{disclaimer}
-							</div>
-						</Modal.Body>
-					</Modal>						
+					{
+						disclaimer !== "" ? (
+							<>
+								<div onClick={() => setShow(true)} style={{cursor : 'pointer'}}>Disclaimer</div>
+								<Modal
+									show={show}
+									onHide={() => setShow(false)}
+									backdrop="static"
+									keyboard={false}
+								>
+									<Modal.Header closeButton>
+										<Modal.Title>Disclaimer</Modal.Title>
+									</Modal.Header>
+									<Modal.Body>
+										<div className="disclaimer">
+											{disclaimer}
+										</div>
+									</Modal.Body>
+								</Modal>						
+				
+							</>
+						) : ''
+					}
 				</strong>
 			</div>
 		</div>
