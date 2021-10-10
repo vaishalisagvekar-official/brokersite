@@ -21,11 +21,11 @@ async function handler(req, res) {
 
         const requestObj = JSON.parse(JSON.stringify(req.body))
         if(requestObj.brokerId !== undefined) findBrokerQuery._id = new ObjectId(requestObj.brokerId);
-        else {
-            res.status(401).json({
-                message: "Missing broker id field in reuest object"
-            });
-        }
+        // else {
+        //     res.status(401).json({
+        //         message: "Missing broker id field in reuest object"
+        //     });
+        // }
 
         let { db } = await connectToDatabase();
 

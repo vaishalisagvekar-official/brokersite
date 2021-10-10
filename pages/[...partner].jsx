@@ -2,7 +2,6 @@ import React from 'react';
 
 import projects from '../config/project.json';
 import brokers from '../config/broker.json';
-
 import Home from '../components/Home';
 
 export async function getStaticPaths() {
@@ -51,7 +50,7 @@ export async function getStaticProps({ params }) {
 			foundBroker = brokeObj;
 		}
 	});
-	
+
 	return {
 		props: {
 			projectData: foundPartner,
