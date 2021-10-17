@@ -4,7 +4,7 @@ export default function AboutUs(props) {
     return (
         <div id={props.section}>
             <div className="row aboutUs">
-                <div className="col-12 col-md-6 aboutSections">
+                <div className="col-12 col-md-5 aboutSections">
                     <img  src={image} style={{ width: "100%", height: "100%" }} alt="About Us Image"/>
                 </div>
                 <div className={`col-12 col-md-6 aboutSections ${props.cssClass}`}>

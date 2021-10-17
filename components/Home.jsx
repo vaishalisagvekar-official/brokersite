@@ -20,6 +20,13 @@ import EnquiryForm from './EnquiryForm';
 class Home extends Component {
 	constructor(props) {
 		super(props);
+		let sections = [];
+		if(this.props.projectData.websiteMenus !== undefined){
+			sections = this.props.projectData.websiteMenus.sections ? this.props.projectData.websiteMenus.sections : [];
+		}
+		for (let index = 0; index < sections.length; index++) {
+			this[`sectionRef${index}`] = React.createRef();
+		}
 	}
 
 	componentDidMount(){
@@ -27,15 +34,43 @@ class Home extends Component {
 		// 	themeColor : '#0A0A0A'
 		// }
 		this.setStyleOfWholeBody({});
+		if(screen.width < 1200){
+			var prevScrollpos = window.pageYOffset;
+			if(prevScrollpos == 0){
+				document.getElementById("logoDiv").style.top = "0";
+				document.getElementById("menus").style.top = `${document.getElementById("logoDiv").offsetHeight}px`;
+			}
+			window.onscroll = function() {
+				var currentScrollPos = window.pageYOffset;
+				if (prevScrollpos > currentScrollPos) {
+					document.getElementById("logoDiv").style.top = "0";
+					document.getElementById("menus").style.top = `${document.getElementById("logoDiv").offsetHeight}px`;
+				} else {
+					document.getElementById("logoDiv").style.top = `-${document.getElementById("logoDiv").offsetHeight}px`;
+					document.getElementById("menus").style.top = "0";
+				}
+				prevScrollpos = currentScrollPos;
+			}
+		}
 	}
 
 	// Set font family of our choice for whole body
 	setStyleOfWholeBody = (settings) => {
-		var r = document.querySelector('.microsite-content');
-		if(settings.fontFamily) r.style.setProperty('--fontFamily', settings.fontFamily);
+		var r = document.querySelector('.root');
+		if(settings.fontFamily) r.style.setProperty('--fontFamily', 'Titillium Web');
 		if(settings.lineHeight) r.style.setProperty('--lineHeight', settings.lineHeight);
-		if(settings.themeColor) r.style.setProperty('--themeColor', settings.themeColor);
 		if(settings.fontColor) r.style.setProperty('--fontColor', settings.fontColor);
+		if(settings.themeColor) r.style.setProperty('--themeColor', settings.themeColor);
+	}
+
+	handleMenuClick = (menuIndex) => {
+		const sections = this.props.projectData.websiteMenus.sections;
+		sections.forEach((section, index) => {
+			if (this[`sectionRef${index}`].current !== null) {
+			  this[`sectionRef${index}`].current.className = this[`sectionRef${index}`].current.className.replace(" current", "");
+			}
+		  });
+		this[`sectionRef${menuIndex}`].current.className += " current";
 	}
 
 	render() {
@@ -45,37 +80,72 @@ class Home extends Component {
 		if(this.props.projectData.websiteMenus !== undefined){
 			sections = this.props.projectData.websiteMenus.sections ? this.props.projectData.websiteMenus.sections : [];
 		}
-
 		const contactUsSection = sections.filter((section) => section.id == "contactUs")
+		const footerSection = sections.filter((section) => section.id == "footer")
 
 
 	return (
-		<div className="microsite-content">
+		<>
 			<style jsx global>
 					{globalStyles}
 			</style>
-			<Navbar collapseOnSelect expand="lg" fixed="top" className="navbar themeColor">
-				<Navbar.Brand href="#banner"><img 
-					className="logo"
-					src={logoLong} alt="Project Logo" /></Navbar.Brand>
-				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
-				<Navbar.Collapse id="responsive-navbar-nav" className="navbar-collapse">
-					<Nav className="me-auto navs">
+			<div className="header">
+				<div className="menubar themeColor">
+					<div className="row logoDiv" id="logoDiv">
+						<a href="#banner">
+							<img className="logo" src={logoLong} alt="Project Logo" />
+						</a>
+					</div>
+					<div className="row menus themeColor" id="menus">
 						{
 							sections.map((section, index) => {
 								if(section.id !== "footer"){
-									const sectionName = section.title.toLocaleUpperCase();
-									return <Nav.Link href={`#${section.id}`} className="nav-link">{sectionName}</Nav.Link>
+									if(index == 0){
+										const sectionName = section.title.toLocaleUpperCase();
+										return <a href={`#${section.id}`} 
+												className="nav-link current" 
+												style={{width: 'auto', whiteSpace: 'nowrap', margin: 'auto'}} 
+												key={`nav-link${index}`} 
+												ref={this[`sectionRef${index}`]}
+												onClick={() => this.handleMenuClick(index)}>
+													{sectionName}
+												</a>
+									} else {
+										const sectionName = section.title.toLocaleUpperCase();
+										return <a href={`#${section.id}`} 
+												className="nav-link" 
+												style={{width: 'auto', whiteSpace: 'nowrap', margin: 'auto'}} 
+												key={`nav-link${index}`} 
+												ref={this[`sectionRef${index}`]}
+												onClick={() => this.handleMenuClick(index)}>
+													{sectionName}
+												</a>
+									}
 								}
 							})
 						}
-					</Nav>
-				</Navbar.Collapse>
-			</Navbar>
+					</div>
+				</div>
+			</div>
+
+			{/* .menus a:after,
+.menus a:before {
+  transition: all .5s;
+}
+.menus a {
+  position:relative;
+  z-index: 1;
+}
+
+.menus a:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 11px rgba(33,33,33,.2);
+  color: var(--themeColor) !important;
+  background-color: var(--fontColor)
+} */}
+			
 			{
 				sections.map((section, index) => {
-					console.log(section.id)
-					console.log(index)
 					if(section.id == 'banner'){
 						return <SlideShow 
 									key={section.id} 
@@ -134,9 +204,9 @@ class Home extends Component {
 			{
 				contactUsSection.length > 0 ? (
 					<ContactUs
-						key={section.id}
-						section={section.id}
-						contactUsData={section}
+						key={contactUsSection[0].id}
+						section={contactUsSection[0].id}
+						contactUsData={contactUsSection[0]}
 						brokerData={this.props.brokerData}
 					></ContactUs>
 				) : (
@@ -148,11 +218,11 @@ class Home extends Component {
 				)
 			}
 			{ 
-				sections[sections.length - 1].id == 'footer' ? (
+				footerSection.length > 0 ? (
 					<Footer
-						key={sections[sections.length - 1].id}
-						section={sections[sections.length - 1].id}
-						footerData={sections[sections.length - 1]}
+						key={footerSection[0].id}
+						section={footerSection[0].id}
+						footerData={footerSection[0]}
 						cssClass={"verticallyMiddle"}
 					></Footer>
 				) : ''
@@ -161,7 +231,7 @@ class Home extends Component {
 			<ModalContainer id="enquiryFormId" title="Get In Touch">
 				<EnquiryForm isFromModal={true}></EnquiryForm>
 			</ModalContainer>
-		</div>
+		</>
 		);
 	}
 }

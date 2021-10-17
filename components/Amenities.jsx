@@ -42,3 +42,4 @@ export default function Amenities(props) {
         
     );
 }
+// , backgroundImage : `url(../public/assets/images/amenity-icon-bg.jpg)`

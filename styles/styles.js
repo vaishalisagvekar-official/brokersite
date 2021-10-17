@@ -2,11 +2,71 @@ import css from 'styled-jsx/css';
 
 export default css.global`
 * {box-sizing: border-box;}
+
+/* latin-ext */
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(titilliumweb/v10/NaPDcZTIAOhVxoMyOr9n_E7ffAzHGIVzY4SY.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(titilliumweb/v10/NaPDcZTIAOhVxoMyOr9n_E7ffAzHGItzYw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(titilliumweb/v10/NaPDcZTIAOhVxoMyOr9n_E7ffGjEGIVzY4SY.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(titilliumweb/v10/NaPDcZTIAOhVxoMyOr9n_E7ffGjEGItzYw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(titilliumweb/v10/NaPecZTIAOhVxoMyOr9n_E7fdM3mDbRS.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(titilliumweb/v10/NaPecZTIAOhVxoMyOr9n_E7fdMPmDQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
-  --fontFamily: Verdana, sans-serif;
+  --fontFamily: 'Titillium Web';
   --lineHeight: 28.125px; 
   --themeColor: #C49675;
   --fontColor: white;
+}
+
+body {
+  font-family: var(--fontFamily);
 }
 
 #gallery img,
@@ -18,17 +78,71 @@ export default css.global`
   margin: 0;
 }
 
-/* Project logo */
-.logo { 
-	width: 230px;
-	height: 60px;
-}
-
 /* theme background color & font color */
 .themeColor{
   background-color: var(--themeColor, black) !important;
   color: var(--fontColor, black) !important;
 }
+
+/* Project logo */
+.logo { 
+	width: 230px;
+	height: 51px;
+}
+
+.header{
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+@media screen and (min-width: 1201px) {
+  .menubar {
+    display: flex;
+    position: relative;
+  }
+
+  .menus {
+    overflow: auto;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    top: auto;
+  }
+
+  .logoDiv {
+    background-color: var(--themeColor, black) !important;
+    padding: 8px 15px;
+    width: 20%
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .menubar {
+    display: block;
+    position: unset;
+  }
+  .logoDiv {
+    transition: top 0.3s;
+    position: absolute;
+    width: 100%;
+    background-color: var(--themeColor, black) !important;
+  }
+  .menus {
+    overflow: auto;
+    padding: 10px 0;
+    position: absolute;
+    left: 0;
+    right: unset;
+    height: auto;
+    width: 100%;
+    display: inline-block;
+    transition: top 0.3s;
+  }
+}
+
 
 /* top header bar */
 .navbar {
@@ -36,14 +150,28 @@ export default css.global`
   padding-right: 25px;
 }
 .nav-link{
-	color: var(--fontColor, white) !important;
+	/* color: var(--fontColor, white) !important; */
+  color: rgba(255, 255, 255, 0.5);
   font-weight: 500;
   padding-right: 1rem !important;
   padding-left: 1rem !important;
+  display: inline !important;
+
 }
 
-.nav-link:hover{
-  color: var(blue, white) !important;
+.menus a:hover,
+.menus a.current {
+  color: #ffffff;
+  border-bottom: 1px solid var(--fontColor, white) !important;
+}
+
+.menus::-webkit-scrollbar {
+  display: none;
+}
+
+.menus {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .navs {
@@ -58,6 +186,7 @@ export default css.global`
 
 .brochure{
   margin-top: 50px;
+  font-size: 13px
 }
 
 .sectionTitle{
@@ -81,7 +210,7 @@ export default css.global`
 }
 
 .btn{
-	 padding: 12px;
+	 padding: 12px 16px;
    font-weight: 600;
    border-radius: 0;
 }
@@ -130,6 +259,7 @@ export default css.global`
 }
 
 @media screen and (max-width: 768px) {
+
   .sectionContent {
     padding: 30px 0;
     justify-content: center;
@@ -150,7 +280,7 @@ export default css.global`
 }
 
 @media screen and (min-width: 577px) {
-  
+
   .amenityIconContainr{
     margin: 15px;
     border: 1px solid #3c3939;
