@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "start:prod": "next start -p 80"
   },
   "dependencies": {
     "bootstrap": "^5.1.1",
